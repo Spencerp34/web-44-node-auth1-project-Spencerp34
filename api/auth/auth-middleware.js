@@ -12,7 +12,7 @@ function restricted(req, res, next) {
   if(req.session.user){
       next()
   }else{
-      next({status: 401, message: 'Must be logged in!'})
+      next({status: 401, message: 'You shall not pass!'})
   }
 }
 
@@ -51,9 +51,10 @@ async function checkUsernameFree(req, res, next) {
 async function checkUsernameExists(req, res, next) {
   try{
     const {username} = req.body
-    const result = await User.findBy({username})
+    const users = await User.findBy({username})
 
-    if(result.length){
+    if(users.length){
+      req.user = users[0]
       next()
     }else{
       next({status:401, message: 'Invalid Credentials'})
@@ -73,7 +74,7 @@ async function checkUsernameExists(req, res, next) {
     "message": "Password must be longer than 3 chars"
   }
 */
-async function checkPasswordLength(req, res, next) {
+function checkPasswordLength(req, res, next) {
   const {password} = req.body
 
   if(!password || password.length < 3){

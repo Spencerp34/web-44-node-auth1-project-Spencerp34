@@ -32,7 +32,7 @@ const {restricted} = require('../auth/auth-middleware')
  */
 
 
-  router.get('/', async (req, res, next) => {
+  router.get('/', restricted, async (req, res, next) => {
     try{
       const users = await User.find()
       res.json(users)
