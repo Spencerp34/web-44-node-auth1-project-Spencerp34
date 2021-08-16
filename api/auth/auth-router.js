@@ -28,7 +28,7 @@ const {checkPasswordLength, checkUsernameExists, checkUsernameFree} = require('.
   }
  */
 
-  router.post('/register', (req, res, next) =>{
+  router.post('/register', checkUsernameFree, checkPasswordLength, (req, res, next) =>{
     res.json('register working')
   })
 
@@ -48,7 +48,7 @@ const {checkPasswordLength, checkUsernameExists, checkUsernameFree} = require('.
   }
  */
 
-  router.post('/login', (req, res, next) =>{
+  router.post('/login', checkUsernameExists, (req, res, next) =>{
     res.json('login working')
   })
 
