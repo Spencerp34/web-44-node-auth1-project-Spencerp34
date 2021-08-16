@@ -6,7 +6,7 @@ const db = require('../../data/db-config');
  */
 
   function find() {
-    return db("users").select("id", "username").orderBy("id");
+    return db("users").select("user_id", "username")
   }
 
 /**
@@ -14,7 +14,7 @@ const db = require('../../data/db-config');
  */
 
   function findBy(filter) {
-    return db("users").where(filter).orderBy("id");
+    return db("users").where(filter).orderBy("user_id");
   }
 
 /**
@@ -28,7 +28,7 @@ function findById(user_id) {
   resolves to the newly inserted user { user_id, username }
  */
 async function add(user) {
-  const [id] = await db("users").insert(user, "id");
+  const [id] = await db("users").insert(user, "user_id");
   return findById(id);
 }
 

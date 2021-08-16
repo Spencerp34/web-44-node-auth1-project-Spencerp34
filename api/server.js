@@ -2,7 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const server = express();
-// const session = require('express-session')
+const session = require('express-session')
 const authRouter = require('../api/auth/auth-router')
 const usersRouter = require('../api/users/users-router')
 
@@ -25,6 +25,19 @@ const usersRouter = require('../api/users/users-router')
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+
+server.use(session({
+  name: 'Radiance',
+  secret: 'Szeth son son Velano truthless of shinovar',
+  cookie: {
+    maxAge: 1000 * 60 * 60,
+    secure: false,
+    httpOnly: false
+  },
+  rolling: true,
+  resave: false,
+  saveUninitialized: false
+}))
 
 server.use('/api/auth', authRouter)
 server.use('/api/users', usersRouter);
