@@ -28,7 +28,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use(session({
-  name: 'choclatechip',
+  name: 'chocolatechip',
   secret: 'Szeth son son Velano truthless of shinovar',
   rolling: true,
   resave: false,
